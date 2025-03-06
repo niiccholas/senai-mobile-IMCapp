@@ -5,4 +5,5 @@
     <string name="next">Next</string>
     <string name="logo">Application logo</string>
     <string name="placeholder">Type your name here..</string>
+    <string name="hi">Hi!</string>
 </resources>

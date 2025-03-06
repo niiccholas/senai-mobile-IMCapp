@@ -11,8 +11,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -20,15 +24,20 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -36,29 +45,34 @@ import br.senai.sp.jandira.bmi.R
 
 @Composable
 fun Homescreen(modifier: Modifier = Modifier) {
+
+    var nomeState = remember {
+        mutableStateOf(value = "")
+    }
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(brush = Brush.linearGradient(
                 listOf(
                     Color(0xFFE0E0E0),
-                    Color(0xFFFF3900),
+                    Color(0xFFF65B22),
                 )
             ))
-    ){
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.SpaceBetween
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceBetween
 
         ) {
             Image(
                 modifier = Modifier
                     .padding(vertical = 50.dp),
                 painter = painterResource(R.drawable.exercise),
-                contentDescription = stringResource(R.string.logo) //descrição do conteúdo, obrigatório por questão de acessibilidade
+                contentDescription = stringResource(R.string.logo )
             )
+
             Text(
                 modifier = Modifier
                     .padding(bottom = 60.dp),
@@ -88,11 +102,32 @@ fun Homescreen(modifier: Modifier = Modifier) {
                             fontWeight = FontWeight.Bold
                         )
                         OutlinedTextField(
-                            value = "",
-                            onValueChange = {},
+                            value = nomeState.value,
+                            onValueChange = { it ->
+                                nomeState.value = it
+                            },
                             label = {
                                 Text(text = stringResource(R.string.placeholder))
-                            }
+                            },
+                            leadingIcon = {
+                                Icon(
+                                    imageVector = Icons.Default.Email,
+                                    contentDescription = "",
+                                    tint = Color(0xFFC29B81)
+                                )
+                            },
+                            trailingIcon = {
+                                Icon(
+                                    imageVector = Icons.Default.LocationOn,
+                                    contentDescription = "",
+                                    tint = Color(0xFFA47858)
+                                )
+                            },
+                            keyboardOptions = KeyboardOptions(
+                                    keyboardType = KeyboardType.Text,
+
+                                capitalization = KeyboardCapitalization.Words
+                            )
                         )
                     }
 
@@ -106,12 +141,15 @@ fun Homescreen(modifier: Modifier = Modifier) {
                         modifier = Modifier
                             .align(Alignment.End)
                     )
-                    { Text(text = stringResource(R.string.next),
-                        fontSize = 17.sp)
-                    Icon(
-                        imageVector = Icons.Filled.ArrowForward,
-                        contentDescription = ""
-                    )
+                    {
+                        Text(
+                            text = stringResource(R.string.next),
+                            fontSize = 17.sp
+                        )
+                        Icon(
+                            imageVector = Icons.Filled.ArrowForward,
+                            contentDescription = ""
+                        )
                     }
                 }
             }
