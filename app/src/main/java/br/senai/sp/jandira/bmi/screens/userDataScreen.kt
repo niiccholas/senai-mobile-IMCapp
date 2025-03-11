@@ -40,6 +40,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -188,7 +189,8 @@ fun Datascreen(modifier: Modifier = Modifier){
                                 )
                             },
                             keyboardOptions = KeyboardOptions(
-                                keyboardType = KeyboardType.Number
+                                keyboardType = KeyboardType.Number,
+                                imeAction = ImeAction.Next
                             )
                         )
                         OutlinedTextField(
@@ -214,7 +216,8 @@ fun Datascreen(modifier: Modifier = Modifier){
                                 )
                             },
                             keyboardOptions = KeyboardOptions(
-                                keyboardType = KeyboardType.Number
+                                keyboardType = KeyboardType.Number,
+                                imeAction = ImeAction.Next
                             )
                         )
                         OutlinedTextField(
@@ -238,7 +241,8 @@ fun Datascreen(modifier: Modifier = Modifier){
                                 )
                             },
                             keyboardOptions = KeyboardOptions(
-                                keyboardType = KeyboardType.Number
+                                keyboardType = KeyboardType.Number,
+                                imeAction = ImeAction.Done
                             )
                         )
                     }
