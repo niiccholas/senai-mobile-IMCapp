@@ -12,4 +12,9 @@
     <string name="weight">Weight</string>
     <string name="height">Height</string>
     <string name="calculate">Calculate</string>
+    <string name="bmi">Your BMI Result</string>
+    <string name="test">30</string>
+    <string name="youhave">You have Underweight IMC</string>
+    <string name="age2">Age</string>
+    <string name="newcalc">New Calc</string>
 </resources>

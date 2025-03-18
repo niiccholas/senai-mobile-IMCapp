@@ -65,7 +65,7 @@ fun Datascreen(modifier: Modifier = Modifier){
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFBD6C35))
+            .background(Color(0xFFEA9665))
     ){
         Column(
             modifier = Modifier
@@ -260,11 +260,6 @@ fun Datascreen(modifier: Modifier = Modifier){
                             style = TextStyle(fontSize = 23.sp))
                     }
                 }
-
-
-
-//                OutlinedTextField()
-//                Button() { }
             }
         }
     }
