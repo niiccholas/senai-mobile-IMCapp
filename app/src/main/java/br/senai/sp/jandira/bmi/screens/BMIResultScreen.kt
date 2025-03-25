@@ -24,20 +24,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import br.senai.sp.jandira.bmi.R
 
 @Composable
-fun ResultScreen(modifier: Modifier = Modifier){
+fun BMIResultScreen(controleDeNavegacao: NavHostController?) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -85,7 +83,7 @@ fun ResultScreen(modifier: Modifier = Modifier){
                                 .align(alignment = Alignment.Center),
                             text = stringResource(R.string.test),
                             color = Color.Black,
-                            fontSize = 50.sp,
+                            fontSize = 45.sp,
                             fontWeight = FontWeight.Bold
                         )
                     }
@@ -101,7 +99,7 @@ fun ResultScreen(modifier: Modifier = Modifier){
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(vertical = 20.dp)
-                            .height(90.dp),
+                            .height(80.dp),
                         colors = CardDefaults.cardColors(Color(0x5956351D))
                     ){
                         Row(
@@ -167,7 +165,9 @@ fun ResultScreen(modifier: Modifier = Modifier){
                             .padding(vertical = 30.dp)
                     )
                     Button(
-                        onClick = {},
+                        onClick = {
+                            controleDeNavegacao!!.navigate("user_data")
+                        },
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(60.dp),
@@ -191,5 +191,5 @@ fun ResultScreen(modifier: Modifier = Modifier){
 @Preview(showSystemUi = true)
 @Composable
 private fun ResultScreenPreview () {
-    ResultScreen()
+    BMIResultScreen(null)
 }

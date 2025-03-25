@@ -13,15 +13,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowUpward
 import androidx.compose.material.icons.filled.Balance
-import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Numbers
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -41,16 +38,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import br.senai.sp.jandira.bmi.R
 
 @Composable
-fun Datascreen(modifier: Modifier = Modifier){
+fun Datascreen(controleDeNavegacao: NavHostController?) {
 
     var ageState = remember {
         mutableStateOf(value = "")
@@ -253,7 +249,9 @@ fun Datascreen(modifier: Modifier = Modifier){
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color(0xFFD5845F)
                         ),
-                        onClick = {},
+                        onClick = {
+                            controleDeNavegacao!!.navigate("bmi_result")
+                        },
                         shape = RoundedCornerShape(20.dp)
                     ) {
                         Text(text = stringResource(R.string.calculate),
@@ -268,5 +266,5 @@ fun Datascreen(modifier: Modifier = Modifier){
 @Preview(showSystemUi = true)
 @Composable
 private fun DatascreenPreview () {
-    Datascreen()
+    Datascreen(null)
 }
