@@ -1,5 +1,6 @@
 package br.senai.sp.jandira.bmi.screens
 
+import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -34,6 +35,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -57,6 +59,26 @@ fun Datascreen(controleDeNavegacao: NavHostController?) {
     var heightState = remember {
         mutableStateOf(value = "")
     }
+    var selectedColorState = remember {
+        mutableStateOf(Color(0xFFF85A00))
+    }
+    var notSelectedColorState = remember {
+        mutableStateOf(Color(0xD5D2A385))
+    }
+    var isMaleClicked = remember {
+        mutableStateOf(false)
+    }
+    var isFemaleClicked = remember {
+        mutableStateOf(false)
+    }
+
+    val context = LocalContext.current
+    val userFile = context.getSharedPreferences("user_file", Context.MODE_PRIVATE)
+
+    val userName = userFile.getString("user_name", "User not found")
+
+    // Criamos um editor responsável por editar o arquivo
+    val editor = userFile.edit()
 
     Box(
         modifier = Modifier
@@ -71,7 +93,7 @@ fun Datascreen(controleDeNavegacao: NavHostController?) {
                 modifier = Modifier
                     .weight(1f)
                     .padding(vertical = 40.dp, horizontal = 40.dp),
-                text = stringResource(R.string.hi),
+                text = "${stringResource(R.string.hi)}, $userName!",
                 color = Color.White,
                 fontSize = 30.sp
             )
@@ -118,11 +140,14 @@ fun Datascreen(controleDeNavegacao: NavHostController?) {
                                 )
                             }
                             Button(
-                                onClick = {},
+                                onClick = {
+                                    isMaleClicked.value = true
+                                    isFemaleClicked.value = false
+                                },
                                 modifier = Modifier
                                     .width(150.dp),
                                 colors = ButtonDefaults.buttonColors(
-                                    containerColor = Color(0xFF2391E9)
+                                    containerColor = if(isMaleClicked.value) selectedColorState.value else notSelectedColorState.value
                                 )
                             ) {
                                 Text(stringResource(R.string.male))
@@ -150,11 +175,14 @@ fun Datascreen(controleDeNavegacao: NavHostController?) {
                                 )
                             }
                             Button(
-                                onClick = {},
+                                onClick = {
+                                    isFemaleClicked.value = true
+                                    isMaleClicked.value = false
+                                },
                                 modifier = Modifier
                                     .width(150.dp),
                                 colors = ButtonDefaults.buttonColors(
-                                    containerColor = Color(0xFFF41944)
+                                    containerColor = if(isFemaleClicked.value) selectedColorState.value else notSelectedColorState.value
                                 )
                             ) {
                                 Text(stringResource(R.string.female))
@@ -167,7 +195,7 @@ fun Datascreen(controleDeNavegacao: NavHostController?) {
                             modifier = Modifier
                                 .fillMaxWidth(),
                             value = ageState.value,
-                            onValueChange = {it ->
+                            onValueChange = {
                                 ageState.value = it
                             },
 
@@ -194,7 +222,7 @@ fun Datascreen(controleDeNavegacao: NavHostController?) {
                             modifier = Modifier
                                 .fillMaxWidth(),
                             value = weightState.value,
-                            onValueChange = {it ->
+                            onValueChange = {
                                 weightState.value = it
                             },
 
@@ -221,7 +249,7 @@ fun Datascreen(controleDeNavegacao: NavHostController?) {
                             modifier = Modifier
                                 .fillMaxWidth(),
                             value = heightState.value,
-                            onValueChange = {it ->
+                            onValueChange = {
                                 heightState.value = it
                             },
                             label = {
@@ -233,7 +261,7 @@ fun Datascreen(controleDeNavegacao: NavHostController?) {
                                 Icon(
                                     imageVector = Icons.Default.ArrowUpward,
                                     contentDescription = "",
-                                    tint = Color(0xFFDE844B)
+                                    tint = Color(0xFFD98A5A)
                                 )
                             },
                             keyboardOptions = KeyboardOptions(
@@ -250,6 +278,10 @@ fun Datascreen(controleDeNavegacao: NavHostController?) {
                             containerColor = Color(0xFFD5845F)
                         ),
                         onClick = {
+                            editor.putInt("user_age", ageState.value.toInt())
+                            editor.putInt("user_weight", weightState.value.toInt())
+                            editor.putInt("user_height", heightState.value.toInt())
+                            editor.apply()
                             controleDeNavegacao!!.navigate("bmi_result")
                         },
                         shape = RoundedCornerShape(20.dp)
@@ -261,7 +293,7 @@ fun Datascreen(controleDeNavegacao: NavHostController?) {
             }
         }
     }
-}
+}//mmsiam
 
 @Preview(showSystemUi = true)
 @Composable

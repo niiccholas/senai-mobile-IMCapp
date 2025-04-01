@@ -1,5 +1,6 @@
 package br.senai.sp.jandira.bmi.screens
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -26,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -36,6 +39,19 @@ import br.senai.sp.jandira.bmi.R
 
 @Composable
 fun BMIResultScreen(controleDeNavegacao: NavHostController?) {
+
+    // Obtendo o contexto da tela atual
+    val context = LocalContext.current
+    // Abrir ou criar um arquivo SharedPreferences
+    val userFile = context
+        .getSharedPreferences(
+            "user_file", Context.MODE_PRIVATE
+        )
+
+    val userAge = userFile.getInt("user_age", 0)
+    val userWeight = userFile.getInt("user_weight", 0)
+    val userHeight = userFile.getInt("user_height", 0)
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -105,8 +121,6 @@ fun BMIResultScreen(controleDeNavegacao: NavHostController?) {
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-//                                .padding(horizontal = 40.dp),
-//                            horizontalArrangement = Arrangement.SpaceBetween
                         ) {
                             Column(
                                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -120,7 +134,7 @@ fun BMIResultScreen(controleDeNavegacao: NavHostController?) {
                                     fontSize = 20.sp,
                                     fontWeight = FontWeight.W400
                                 )
-                                Text(text = "50",
+                                Text(text = userAge.toString(),
                                     fontSize = 22.sp,
                                     fontWeight = FontWeight.Bold)
                             }
@@ -135,7 +149,7 @@ fun BMIResultScreen(controleDeNavegacao: NavHostController?) {
                                     fontSize = 20.sp,
                                     fontWeight = FontWeight.W400
                                 )
-                                Text(text = "97 Kg",
+                                Text(text = "$userWeight kg",
                                     fontSize = 22.sp,
                                     fontWeight = FontWeight.Bold)
                             }
@@ -150,7 +164,7 @@ fun BMIResultScreen(controleDeNavegacao: NavHostController?) {
                                     fontSize = 20.sp,
                                     fontWeight = FontWeight.W400
                                 )
-                                Text(text = "178 cm",
+                                Text(text = userHeight.toString(),
                                     fontSize = 22.sp,
                                     fontWeight = FontWeight.Bold)
                             }
@@ -159,7 +173,19 @@ fun BMIResultScreen(controleDeNavegacao: NavHostController?) {
                     }
                     Box(
                         modifier = Modifier
-                            .height(200.dp))
+                            .height(230.dp)){
+                        Row {
+                            Box(
+                                modifier = Modifier
+                                    .clip(shape = CircleShape)
+                                    .height(20.dp)
+                                    .width(20.dp)
+                                    .background(color = Color.Red)
+
+                            )
+                        }
+                        }
+
                     HorizontalDivider(
                         modifier = Modifier
                             .padding(vertical = 30.dp)
