@@ -71,6 +71,7 @@ fun Datascreen(controleDeNavegacao: NavHostController?) {
     var isFemaleClicked = remember {
         mutableStateOf(false)
     }
+    // fazer o genero
 
     val context = LocalContext.current
     val userFile = context.getSharedPreferences("user_file", Context.MODE_PRIVATE)

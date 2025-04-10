@@ -36,6 +36,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import br.senai.sp.jandira.bmi.R
+import br.senai.sp.jandira.bmi.model.bmiCalculator
+import br.senai.sp.jandira.bmi.screens.components.BmiLevels
+import java.util.Locale
 
 @Composable
 fun BMIResultScreen(controleDeNavegacao: NavHostController?) {
@@ -51,6 +54,8 @@ fun BMIResultScreen(controleDeNavegacao: NavHostController?) {
     val userAge = userFile.getInt("user_age", 0)
     val userWeight = userFile.getInt("user_weight", 0)
     val userHeight = userFile.getInt("user_height", 0)
+
+    val resultBmi = bmiCalculator(userWeight, userHeight.toDouble())
 
     Box(
         modifier = Modifier
@@ -91,18 +96,21 @@ fun BMIResultScreen(controleDeNavegacao: NavHostController?) {
                     Box(
                             modifier = Modifier
                                 .size(120.dp)
-                                .border(7.dp, Color(0xFF8AE886), CircleShape)
+                                .border(7.dp, resultBmi.color, CircleShape)
                                 .clip(CircleShape),
-                    ){
+                    )
+                    {
+                        val bmiValue = resultBmi.bmiValues.second
                         Text(
                             modifier = Modifier
                                 .align(alignment = Alignment.Center),
-                            text = stringResource(R.string.test),
+                            text = String.format(Locale.getDefault(), "%.1f", bmiValue),
                             color = Color.Black,
                             fontSize = 45.sp,
                             fontWeight = FontWeight.Bold
                         )
                     }
+
                     Text(
                         modifier = Modifier
                             .padding(top = 10.dp),
@@ -171,20 +179,16 @@ fun BMIResultScreen(controleDeNavegacao: NavHostController?) {
 
                         }
                     }
-                    Box(
+                    Column(
                         modifier = Modifier
-                            .height(230.dp)){
-                        Row {
-                            Box(
-                                modifier = Modifier
-                                    .clip(shape = CircleShape)
-                                    .height(20.dp)
-                                    .width(20.dp)
-                                    .background(color = Color.Red)
-
-                            )
-                        }
-                        }
+                            .height(250.dp))
+                    {
+                        BmiLevels()
+                        BmiLevels()
+                        BmiLevels()
+                        BmiLevels()
+                        BmiLevels()
+                    }
 
                     HorizontalDivider(
                         modifier = Modifier

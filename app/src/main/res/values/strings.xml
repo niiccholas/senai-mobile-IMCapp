@@ -17,4 +17,10 @@
     <string name="youhave">You have Underweight IMC</string>
     <string name="age2">Age</string>
     <string name="newcalc">New Calc</string>
+    <string name="under_weight">You are below your ideal weight.</string>
+    <string name="normal_weight">You have normal body weight.</string>
+    <string name="over_weight">You are slightly overweight.</string>
+    <string name="class1_weight">You have Class I obesity.</string>
+    <string name="class2_weight">You have Class II obesity.</string>
+    <string name="class3_weight">You have Class IIII obesity.</string>
 </resources>
