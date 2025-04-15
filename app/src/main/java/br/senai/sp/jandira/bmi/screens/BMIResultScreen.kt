@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import br.senai.sp.jandira.bmi.R
+import br.senai.sp.jandira.bmi.model.BmiStatus
 import br.senai.sp.jandira.bmi.model.bmiCalculator
 import br.senai.sp.jandira.bmi.screens.components.BmiLevels
 import java.util.Locale
@@ -187,32 +188,44 @@ fun BMIResultScreen(controleDeNavegacao: NavHostController?) {
                         BmiLevels(
                             leftText = stringResource(R.string.underweight),
                             rightText = "< " + String.format(Locale.getDefault(), "%.1f", 18.5),
-                            bulletBackground = colorResource(R.color.light_blue)
+                            bulletBackground = colorResource(R.color.light_blue),
+                            background = if(resultBmi.status == BmiStatus.UNDER_WEIGHT) colorResource(R.color.light_blue) else Color.Transparent,
+                            textColor = Color.Black
                         )
                         BmiLevels(
                             leftText = stringResource(R.string.normal),
                             rightText = String.format(Locale.getDefault(), "%.1f", 18.6) + " - " + String.format(Locale.getDefault(), "%.1f", 24.9),
-                            bulletBackground = colorResource(R.color.light_green)
+                            bulletBackground = colorResource(R.color.light_green),
+                            background = if(resultBmi.status == BmiStatus.NORMAL) colorResource(R.color.light_green) else Color.Transparent,
+                            textColor = Color.Black
                         )
                         BmiLevels(
                             leftText = stringResource(R.string.overweight),
                             rightText = String.format(Locale.getDefault(), "%.1f", 25.0) + " - " + String.format(Locale.getDefault(), "%.1f", 29.9),
-                            bulletBackground = colorResource(R.color.yellow)
+                            bulletBackground = colorResource(R.color.yellow),
+                            background = if(resultBmi.status == BmiStatus.OVER_WEIGHT) colorResource(R.color.yellow) else Color.Transparent,
+                            textColor = Color.Black
                         )
                         BmiLevels(
                             leftText = stringResource(R.string.obesity1),
                             rightText = String.format(Locale.getDefault(), "%.1f", 30.0) + " - " + String.format(Locale.getDefault(), "%.1f", 34.9),
-                            bulletBackground = colorResource(R.color.light_orange)
+                            bulletBackground = colorResource(R.color.light_orange),
+                            background = if(resultBmi.status == BmiStatus.OBESITY_1) colorResource(R.color.light_orange) else Color.Transparent,
+                            textColor = if(resultBmi.status == BmiStatus.OBESITY_1) Color.White else Color.Black
                         )
                         BmiLevels(
                             leftText = stringResource(R.string.obesity2),
                             rightText = String.format(Locale.getDefault(), "%.1f", 35.0) + " - " + String.format(Locale.getDefault(), "%.1f", 39.9),
-                            bulletBackground = colorResource(R.color.dark_orange)
+                            bulletBackground = colorResource(R.color.dark_orange),
+                            background = if(resultBmi.status == BmiStatus.OBESITY_2) colorResource(R.color.dark_orange) else Color.Transparent,
+                            textColor = if(resultBmi.status == BmiStatus.OBESITY_2) Color.White else Color.Black
                         )
                         BmiLevels(
                             leftText = stringResource(R.string.obesity3),
                             rightText = "> " + String.format(Locale.getDefault(), "%.1f", 39.9),
-                            bulletBackground = colorResource(R.color.red)
+                            bulletBackground = colorResource(R.color.red),
+                            background = if(resultBmi.status == BmiStatus.OBESITY_3) colorResource(R.color.red) else Color.Transparent,
+                            textColor = if(resultBmi.status == BmiStatus.OBESITY_3) Color.White else Color.Black
                         )
                     }
 

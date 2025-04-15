@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
@@ -28,7 +29,8 @@ import java.util.Locale
 
 @Composable
 fun BmiLevels(leftText: String = "", rightText: String = "", background: Color = Color.Transparent,
-              bulletBackground: Color = (colorResource(R.color.light_blue))){
+              bulletBackground: Color = (colorResource(R.color.light_blue)),
+              textColor: Color = (colorResource(R.color.black))){
     Row (
         modifier = Modifier
             .fillMaxWidth()
@@ -52,11 +54,13 @@ fun BmiLevels(leftText: String = "", rightText: String = "", background: Color =
             shape = RoundedCornerShape(8.dp)
         ) {
             Row (modifier = Modifier.fillMaxWidth()
-                .fillMaxHeight(),
+                .fillMaxHeight()
+                .padding(horizontal = 10.dp),
+
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween){
-                Text(leftText)
-                Text(rightText)
+                Text(leftText, fontSize = 17.sp, color = textColor)
+                Text(rightText, fontSize = 15.sp, color = textColor)
             }
         }
 
