@@ -29,6 +29,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -183,11 +184,36 @@ fun BMIResultScreen(controleDeNavegacao: NavHostController?) {
                         modifier = Modifier
                             .height(250.dp))
                     {
-                        BmiLevels()
-                        BmiLevels()
-                        BmiLevels()
-                        BmiLevels()
-                        BmiLevels()
+                        BmiLevels(
+                            leftText = stringResource(R.string.underweight),
+                            rightText = "< " + String.format(Locale.getDefault(), "%.1f", 18.5),
+                            bulletBackground = colorResource(R.color.light_blue)
+                        )
+                        BmiLevels(
+                            leftText = stringResource(R.string.normal),
+                            rightText = String.format(Locale.getDefault(), "%.1f", 18.6) + " - " + String.format(Locale.getDefault(), "%.1f", 24.9),
+                            bulletBackground = colorResource(R.color.light_green)
+                        )
+                        BmiLevels(
+                            leftText = stringResource(R.string.overweight),
+                            rightText = String.format(Locale.getDefault(), "%.1f", 25.0) + " - " + String.format(Locale.getDefault(), "%.1f", 29.9),
+                            bulletBackground = colorResource(R.color.yellow)
+                        )
+                        BmiLevels(
+                            leftText = stringResource(R.string.obesity1),
+                            rightText = String.format(Locale.getDefault(), "%.1f", 30.0) + " - " + String.format(Locale.getDefault(), "%.1f", 34.9),
+                            bulletBackground = colorResource(R.color.light_orange)
+                        )
+                        BmiLevels(
+                            leftText = stringResource(R.string.obesity2),
+                            rightText = String.format(Locale.getDefault(), "%.1f", 35.0) + " - " + String.format(Locale.getDefault(), "%.1f", 39.9),
+                            bulletBackground = colorResource(R.color.dark_orange)
+                        )
+                        BmiLevels(
+                            leftText = stringResource(R.string.obesity3),
+                            rightText = "> " + String.format(Locale.getDefault(), "%.1f", 39.9),
+                            bulletBackground = colorResource(R.color.red)
+                        )
                     }
 
                     HorizontalDivider(
